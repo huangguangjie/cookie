@@ -1,10 +1,13 @@
 import webpack from 'webpack'
 export default {
-    entry: ['babel-polyfill', './src'],
+    entry: './src',
     output: {
         path: __dirname + '/build',
         publicPath: '/build',
-        filename: "cookie.js"
+        filename: "cookie.js",
+        library: 'cookie',
+        libraryTarget: 'umd',
+        umdNamedDefine: true
     },
     module: {
         loaders: [
@@ -12,10 +15,15 @@ export default {
         ]
     },
     resolve: {
-        extensions: ['.js', '.es6']
+        extensions: [' ','.js', '.es6']
     },
     plugins: [
-        new webpack.optimize.UglifyJsPlugin()
+        new webpack.optimize.UglifyJsPlugin({
+            minimize: true,
+            comments: false,
+            sourceMap: true
+        }),
+        new webpack.optimize.CommonsChunkPlugin({ name: ['umd'], filename: '[name].js'})
     ],
-    devtool: 'eval-source-map'
+    devtool: 'source-map'
 }
