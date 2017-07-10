@@ -6,5 +6,9 @@
 <body>
 	<script src="build/umd.js"></script>
 	<script src="build/cookie.js"></script>
+	<script>
+		cookie.default.set('cookie-test','hello world!')
+		console.log(cookie.default.get('cookie-test','hello world!'))
+	</script>
 </body>
 </html>
